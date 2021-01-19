@@ -4,25 +4,34 @@
       <a routerLink="/" class="brand"> Socio Club </a>
     </span>
     <span class="spacer"></span>
-    <ul>
-      <li *ngIf="isUserAuthenticated">
+    <span *ngIf="isUserAuthenticated" class="mat-caption"
+      >Hi, {{ username }}</span
+    >
+    <span *ngIf="!isUserAuthenticated" class="mat-caption"
+      >You are not logged in!</span
+    >
+    <button mat-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item *ngIf="isUserAuthenticated">
         <a mat-button routerLink="/create" routerLinkActive="mat-primary"
           >Create Post</a
         >
-      </li>
-      <li *ngIf="!isUserAuthenticated">
+      </button>
+      <button mat-menu-item *ngIf="!isUserAuthenticated">
         <a mat-button routerLink="/auth/login" routerLinkActive="mat-primary"
           >Login</a
         >
-      </li>
-      <li *ngIf="!isUserAuthenticated">
+      </button>
+      <button mat-menu-item *ngIf="!isUserAuthenticated">
         <a mat-button routerLink="/auth/signup" routerLinkActive="mat-primary"
           >Signup</a
         >
-      </li>
-      <li *ngIf="isUserAuthenticated">
+      </button>
+      <button mat-menu-item *ngIf="isUserAuthenticated">
         <button type="button" mat-button (click)="onLogout()">Logout</button>
-      </li>
-    </ul>
+      </button>
+    </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>

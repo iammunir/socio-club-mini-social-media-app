@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-confirmation',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfirmationComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public dialogRef: MatDialogRef<ConfirmationComponent>,
+    @Inject(MAT_DIALOG_DATA) public tobeDeleted: any
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+  
+  confirm() {
+    this.tobeDeleted.confirmed = true;
+    return this.tobeDeleted;
   }
 
 }

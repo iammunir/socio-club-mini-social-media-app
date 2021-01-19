@@ -1,1 +1,12 @@
-<p>confirmation works!</p>
+<div class="confirmation-dialog">
+  <div mat-dialog-content>
+    <p>
+      Are you sure want to delete
+      <strong>{{ tobeDeleted.title }}</strong> playlist?
+    </p>
+  </div>
+  <div mat-dialog-actions class="confirmation-dialog-buttons">
+    <button mat-button (click)="onNoClick()">NO</button>
+    <button mat-button color="warn" [mat-dialog-close]="confirm()">YES</button>
+  </div>
+</div>

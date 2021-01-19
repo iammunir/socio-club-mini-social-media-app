@@ -1,0 +1,11 @@
+.confirmation-dialog {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirmation-dialog-buttons {
+  display: flex;
+  justify-content: center;
+}

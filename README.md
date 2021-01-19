@@ -1,4 +1,4 @@
-# Socio Hub - Mini Social Media App
+# Socio Club - Mini Social Media App
 
 This project is a demo project built on top of MEAN Stack.
 
@@ -23,3 +23,14 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Backend Development
 
 The backend server is built with a popular web framework for NodeJS, [Express](https://expressjs.com/). Please note I didn't include environment variables for connection to the database and the secret keyword to generate the JWT. Make sure you create your own.
+
+```json
+{
+  "env": {
+    "MONGO_URI": "database_uri_for_mongodb",
+    "JWT_SECRET": "your_secret_keyword_for_json_web_token"
+  }
+}
+```
+
+Run `npm run start:server` for backend development server

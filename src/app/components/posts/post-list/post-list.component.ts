@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+
 import { Post } from 'src/app/models/post.module';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostsService } from 'src/app/services/posts.service';
+import { ConfirmationComponent } from '../confirmation/confirmation.component';
 
 @Component({
   selector: 'app-post-list',
@@ -24,7 +26,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   currentPage: number = 1;
   pageSizeOptions = [2, 5, 10, 15];
 
-  constructor(private postsService: PostsService, private authService: AuthService) { }
+  constructor(private postsService: PostsService, private authService: AuthService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -46,7 +48,29 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.authStatusSub.unsubscribe();
   }
 
+  openConfirmationDialog(post) {
+    const tobeDeleted = {
+      id: post.id,
+      title: post.title,
+      confirmed: false
+    }
+    const dialogRef = this.dialog.open(ConfirmationComponent, {
+      width: '45%',
+      height : 'auto',
+      data: tobeDeleted
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.confirmed) {
+        this.onDelete(result.id);
+      } else {
+        return;
+      }
+    });
+  }
+
   onDelete(postId: string) {
+
     this.isLoading = true;
     
     this.totalPosts -= 1;
